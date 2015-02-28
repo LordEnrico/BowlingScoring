@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bowling scoring screen simulator</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      .container { margin-top: 30px; }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row" id="players">
+        <div class="col-md-3">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Instructions</div>
+            <div class="panel-body">
+              Please add players, and then press start the button </ br>
+              (Start game)
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <div class="panel panel-primary" id="players_list">
+            <div class="panel-heading">Players names</div>
+            <div class="panel-body">
+              
+              <div class="alert alert-info hidden" role="alert">No players added so far</div>
+              <ul id="players" class="list-group">
+
+              </ul>
+            </div>
+          </div>
+
+
+          <div class="panel panel-primary">
+            <div class="panel-heading">Add player</div>
+            <div class="panel-body">
+              <form id="add-player-form">
+                <div class="form-group">
+                  <label for="player-name">Player Name</label>
+                  <input type="text" class="form-control" id="player_name" placeholder="Enter name here">
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </form>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

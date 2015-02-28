@@ -17,11 +17,43 @@
     <![endif]-->
     <style>
       .container { margin-top: 30px; }
-
     </style>
   </head>
   <body>
-    <div class="container">
+    <div id="game" class="container">
+
+      <div class="row" id="board" style="display: none;">
+
+        <div class="col-md-12">
+
+          <div class="panel panel-primary">
+            <div class="panel-heading">Score board</div>
+            <div class="panel-body">
+
+              <table class="table">
+                <thead><tr>
+                    <th>Player</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                    <th>Total</th>
+                </tr></thead>
+                <tbody id="scores">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel panel-primary">
+            <div class="panel-body text-center">
+              <div class="btn btn-lg btn-success" id="throw_ball">Throw the ball</div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
       <div class="row" id="players">
         <div class="col-md-3">
           <div class="panel panel-primary">
@@ -34,25 +66,27 @@
         </div>
 
         <div class="col-md-9">
-          <div class="panel panel-primary" id="players_list">
-            <div class="panel-heading">Players names</div>
-            <div class="panel-body">
-              
-              <div class="alert alert-info hidden" role="alert">No players added so far</div>
-              <ul id="players" class="list-group">
 
-              </ul>
+          <div class="panel panel-primary">
+            <div class="panel-body text-center">
+              <div class="btn btn-lg btn-success" disabled="disabled" id="start_game">Start game</div>
             </div>
           </div>
 
+          <div class="panel panel-primary" id="players_panel">
+            <div class="panel-heading">Players names</div>
+            <div class="panel-body">
+              <ul id="players_list" class="list-group"></ul>
+            </div>
+          </div>
 
           <div class="panel panel-primary">
             <div class="panel-heading">Add player</div>
             <div class="panel-body">
-              <form id="add-player-form">
+              <form id="add_player_form">
                 <div class="form-group">
                   <label for="player-name">Player Name</label>
-                  <input type="text" class="form-control" id="player_name" placeholder="Enter name here">
+                  <input autocomplete="OFF" type="text" class="form-control" id="player_name" placeholder="Enter name here">
                 </div>
                 <button type="submit" class="btn btn-primary">Add</button>
                 <button type="button" class="btn btn-primary" id="add_random_players">Add random players</button>
@@ -65,10 +99,6 @@
       </div>
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>

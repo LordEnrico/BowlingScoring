@@ -15,10 +15,10 @@ Game.prototype.players = function() {
 
 Game.prototype.startGame = function() {
   this._currentPlayer = null; // Current player index (play who is playing now)
-  this.newFrame(); // Current frame
   for (var i = 0; i < this._players.length; i++) {
     this._scores.push([]);
   }
+  this.newFrame(); // Current frame
 }
 
 Game.prototype.newFrame = function() {
@@ -37,7 +37,10 @@ Game.prototype.newFrame = function() {
       this._currentPlayer = 0;
     }
   }
-  this._frame = { rolls: [], left: 10, frame: this._currentFrame, player: this._currentPlayer };
+  if (!this._finished) {
+    this._frame = { rolls: [], left: 10, frame: this._currentFrame, player: this._currentPlayer };
+    this._scores[this._currentPlayer].push(this._frame);
+  }
 }
 
 Game.prototype.finished = function(pins) {
@@ -48,6 +51,10 @@ Game.prototype.pinsLeft = function() {
   return this._frame.left;
 }
 
+Game.prototype.currentPlayer = function() {
+  return this._currentPlayer;
+}
+
 // pins: pins to be dropped
 // returns the frame
 Game.prototype.throwBall = function(pins) {
@@ -55,20 +62,27 @@ Game.prototype.throwBall = function(pins) {
   if (pins > this._frame.left) return null;
   this._frame.left -= pins;
   var done = false;
-  if (this._frame.rolls.length == 0) { 
+  this._frame.rolls.push(pins);
+  if (this._frame.rolls.length == 1) { 
     // First roll
-    this._frame.rolls.push(pins);
     if (this._frame.left == 0) {
-      done = true; // Fix for the 10th frame
+      if (this._frame.frame < 9)
+        done = true; // Fix for the 10th frame
+      else
+        this._frame.left = 10;
     }
-  } else  {
+  }
+  else if (this._frame.rolls.length == 2) { 
     // Seconds roll
-    this._frame.rolls.push(pins);
-    done = true; // Fix for the 10th frame
+    if (this._frame.frame < 9)
+      done = true; // Fix for the 10th frame
+    else
+      this._frame.left = 10;
+  } else {
+    done = true;
   }
   if (done) {
     var returnFrame = this._frame;
-    this._scores[this._currentPlayer].push(returnFrame);
     this.newFrame();
     return returnFrame;
   } else {
@@ -82,8 +96,24 @@ Game.prototype.leftPins = function() {
 
 Game.prototype.score = function(playerIndex) {
   sum = 0;
-  for (var c = 0; c < this._scores[playerIndex].length; c++) {
-    var frame = this._scores[playerIndex];
+  var strike = false;
+  var spare = false;
+  for (var i = 0; i < this._scores[playerIndex].length; i++) {
+    var frame = this._scores[playerIndex][i];
+    for (var j = 0; j < frame.rolls.length; j++) { 
+      var roll = frame.rolls[j];
+      sum += roll;
+      if (spare) { sum += roll; spare = false; }
+      if (strike) { sum += roll; strike = false; spare = true; }
+
+      if (frame.frame < 9) {
+        if (frame.left == 0 && frame.rolls.length == 1) {
+          strike = true;
+        } else if (frame.left == 0 && frame.rolls.length == 2 ) {
+          spare = true
+        }
+      }
+    }
   }
   return sum;
 }
@@ -191,5 +221,14 @@ function throwBall() {
   addPlayer("Omar");
   addPlayer("Harran");
   startGame();
+
+  testGame = new Game();
+  testGame.addPlayer('omar');
+  testGame.startGame();
+  while (!testGame.finished()) {
+    testGame.throwBall(10);
+  }
+  console.log(testGame.score(0));
+  
 
 })();

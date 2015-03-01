@@ -72,7 +72,7 @@ Game.prototype.throwBall = function(pins) {
     // Seconds roll
     if ((this._frame.frame < 9) || (this._frame.left > 0 && this._frame.rolls[0] < 10))
       done = true;
-    else
+    else if (this._frame.left == 0)
       this._frame.left = 10;
   } else {
     done = true;

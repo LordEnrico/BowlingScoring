@@ -3,7 +3,7 @@ function GameView() {
   element('add_player_form').addEventListener('submit', function(ev) {
     ev.preventDefault();
     var playerName = element('player_name').value;
-    addPlayer(playerName);
+    this.addPlayer(playerName);
   }.bind(this));
 
   element('add_random_players').addEventListener('click', function(ev) {

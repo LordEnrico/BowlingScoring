@@ -50,7 +50,6 @@ Game.prototype.currentPlayer = function() {
   return this._currentPlayer;
 }
 
-
 // pins: pins to be dropped
 // returns the frame
 Game.prototype.throwBall = function(pins) {
@@ -84,10 +83,6 @@ Game.prototype.throwBall = function(pins) {
   } else {
     return this._frame;
   }
-}
-
-Game.prototype.leftPins = function() {
-  return this.frame.left;
 }
 
 Game.prototype.score = function(playerIndex) {

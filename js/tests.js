@@ -29,7 +29,7 @@ QUnit.test("Last frame, strike, then you get two extra shots", function( assert 
   var game = new Game();
   game.addPlayer("Omar");
   game.startGame();
-  i = 2 * 9;
+  var i = 2 * 9;
   while (i-- > 0)
     game.throwBall(1);
   game.throwBall(10);
@@ -43,7 +43,7 @@ QUnit.test("Last frame, spare you get extra shot", function( assert ) {
   var game = new Game();
   game.addPlayer("Omar");
   game.startGame();
-  i = 2 * 9;
+  var i = 2 * 9;
   while (i-- > 0)
     game.throwBall(1);
   game.throwBall(5);

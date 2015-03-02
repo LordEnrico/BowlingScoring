@@ -43,7 +43,7 @@ GameView.prototype.startGame = function() {
   element('players').style.display = 'none';
   this.scoreViews = [];
   this.totalViews = [];
-  for(i = 0; i < this.game.players().length; i++) {
+  for(var i = 0; i < this.game.players().length; i++) {
     var scoreViewsArray = [];
     this.scoreViews.push(scoreViewsArray);
     var player = this.game.players()[i];

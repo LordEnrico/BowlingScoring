@@ -91,7 +91,7 @@ Game.prototype.leftPins = function() {
 }
 
 Game.prototype.score = function(playerIndex) {
-  sum = 0;
+  var sum = 0;
   var strike = false;
   var spare = false;
   for (var i = 0; i < this._scores[playerIndex].length; i++) {

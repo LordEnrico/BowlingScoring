@@ -72,7 +72,7 @@ GameView.prototype.renderFrame = function(frame) {
 
 GameView.prototype.throwBall = function() {
   if (this.game.finished()) return;
-  var pins = Math.floor(Math.random() * (this.game.pinsLeft() + 1));
+  var pins = Math.floor((Math.random() * this.game.pinsLeft()) + 1); // According to the requirements, it should drop 1 - 10 pins. So zero is not possible
   var frame = this.game.throwBall(pins);
   if (frame) {
     this.renderFrame(frame);

@@ -87,22 +87,29 @@ Game.prototype.throwBall = function(pins) {
 
 Game.prototype.score = function(playerIndex) {
   var sum = 0;
-  var strike = false;
-  var spare = false;
-  for (var i = 0; i < this._scores[playerIndex].length; i++) {
-    var frame = this._scores[playerIndex][i];
-    for (var j = 0; j < frame.rolls.length; j++) { 
-      var roll = frame.rolls[j];
-      sum += roll;
-      if (spare) { sum += roll; spare = false; }
-      if (strike) { sum += roll; strike = false; spare = true; }
+  var frames = this._scores[playerIndex];
 
-      if (frame.frame < 9 && j == (frame.rolls.length - 1)) {
-        if (frame.left == 0 && frame.rolls.length == 1) {
-          strike = true;
-        } else if (frame.left == 0 && frame.rolls.length == 2 ) {
-          spare = true
-        }
+  for (var i = 0; i < frames.length; i++) {
+    var frame = frames[i];
+    for (var j = 0; j < frame.rolls.length; j++) {
+      sum += frame.rolls[j];
+    }
+    if (frame.left == 0) {
+      if (frame.rolls.length == 1) {
+        // Strike
+        if (frames[i + 1])
+          if (frames[i + 1].rolls.length == 1) {
+            sum += frames[i + 1].rolls[0] || 0;
+            if (frames[i + 2]) {
+              sum += frames[i + 2].rolls[0] || 0;
+            }
+          } else if (frames[i + 1].rolls.length > 1) {
+            sum += frames[i + 1].rolls[0] + frames[i + 1].rolls[1];
+          }
+      } else if (frame.rolls.length == 2) {
+        // Spare
+        if (frames[i + 1])
+          sum += frames[i + 1].rolls[0] || 0;
       }
     }
   }

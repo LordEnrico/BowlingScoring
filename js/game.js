@@ -94,22 +94,20 @@ Game.prototype.score = function(playerIndex) {
     for (var j = 0; j < frame.rolls.length; j++) {
       sum += frame.rolls[j];
     }
-    if (frame.left == 0) {
+    if ((frame.left == 0) && frames[i + 1]) {
       if (frame.rolls.length == 1) {
         // Strike
-        if (frames[i + 1])
-          if (frames[i + 1].rolls.length == 1) {
-            sum += frames[i + 1].rolls[0] || 0;
-            if (frames[i + 2]) {
-              sum += frames[i + 2].rolls[0] || 0;
-            }
-          } else if (frames[i + 1].rolls.length > 1) {
-            sum += frames[i + 1].rolls[0] + frames[i + 1].rolls[1];
+        if (frames[i + 1].rolls.length == 1) {
+          sum += frames[i + 1].rolls[0] || 0;
+          if (frames[i + 2]) {
+            sum += frames[i + 2].rolls[0] || 0;
           }
+        } else if (frames[i + 1].rolls.length > 1) {
+          sum += frames[i + 1].rolls[0] + frames[i + 1].rolls[1];
+        }
       } else if (frame.rolls.length == 2) {
         // Spare
-        if (frames[i + 1])
-          sum += frames[i + 1].rolls[0] || 0;
+        sum += frames[i + 1].rolls[0] || 0;
       }
     }
   }

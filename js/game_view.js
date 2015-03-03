@@ -22,6 +22,11 @@ function GameView() {
     this.throwBall();
   }.bind(this));
 
+  element('throw_ball_until_end').addEventListener('click', function(ev) {
+    while (!this.game.finished())
+      this.throwBall();
+  }.bind(this));
+
   this.game = new Game();
 }
 
